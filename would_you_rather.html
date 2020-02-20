@@ -10,7 +10,14 @@
     <div id="app">
 
 <!--   HTML template goes here   -->
+        <h1> Would you rather...</h1>
 
+        <would-you-rather-question
+            v-bind:question="question"
+            v-bind:answer1="answer1"
+            v-bind:answer2="answer2">
+        </would-you-rather-question>
+<!--note: component name is generated from the component, but lowercase w/ hyphens; or camelCase-->
     </div>
 
     <script>
@@ -18,16 +25,22 @@
     const WouldYouRatherQuestionComponent = {
         template: `
         <div>
-            <h2>{{ question}}</h2>
+            <h2>{{ question }}</h2>
+            <input type="radio" v-model="choice" v-bind:value="answer1">
+            <label>{{answer1}}</label>
+            <input type="radio" v-model-"choice" v-bind:value="answer2">
+            <label>{{answer2}}</label>
         </div>
         `,
-        date() { /* data if for internal data that b elongs to this component*/
+        data() { /* data if for internal data that b elongs to this component*/
             return {
                 choice: ''
             }
         },
         props: { /* props are for data passed in from parent component to a child-like the question*/
-            question: String,
+            question: String,  /* props have types, but not values*/
+            answer1: String,/*type can be String, Number, Object, Array, Date, Boolean..*/
+            answer2: String
         },
     }
 
