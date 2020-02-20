@@ -15,9 +15,14 @@
         <would-you-rather-question
             v-bind:question="question"
             v-bind:answer1="answer1"
-            v-bind:answer2="answer2">
+            v-bind:answer2="answer2"
+            v-on:answer-changed="answerChanged">
+
         </would-you-rather-question>
 <!--note: component name is generated from the component, but lowercase w/ hyphens; or camelCase-->
+    <div>
+        {{ userSelectionMessage }}
+    </div>
     </div>
 
     <script>
@@ -26,9 +31,9 @@
         template: `
         <div>
             <h2>{{ question }}</h2>
-            <input type="radio" v-model="choice" v-bind:value="answer1">
-            <label>{{answer1}}</label>
-            <input type="radio" v-model-"choice" v-bind:value="answer2">
+            <input type="radio" v-model="choice" v-bind:value="answer1" v-on:change="$emit('answer-changed', choice)">
+            <label>{{answer1}}</label>  
+            <input type="radio" v-model="choice" v-bind:value="answer2" v-on:change="$emit('answer-changed', choice)">
             <label>{{answer2}}</label>
         </div>
         `,
@@ -54,8 +59,11 @@
                     userSelectionMessage: ''
                 }
             },
-            methods: {
-
+            methods: {//parent method takes one argument - answer from child
+                answerChanged(answer) {
+                    //console.log('Event emitted from child')
+                    this.userSelectionMessage = `Thanks! You selected ${answer}`
+                }
             },
             //register components in Vue instance
             components: {
