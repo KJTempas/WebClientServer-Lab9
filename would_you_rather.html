@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Would You Rather</title>
+    <script src="https://unpkg.com/vue@2.6.7/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+<!--   HTML template goes here   -->
+
+    </div>
+
+    <script>
+
+    const WouldYouRatherQuestionComponent = {
+        template: `
+        <div>
+            <h2>{{ question}}</h2>
+        </div>
+        `,
+        date() { /* data if for internal data that b elongs to this component*/
+            return {
+                choice: ''
+            }
+        },
+        props: { /* props are for data passed in from parent component to a child-like the question*/
+            question: String,
+        },
+    }
+
+        let app = new Vue({
+            el: "#app",
+            data() { //Vue instance data is a function w/ 4 attributes
+                return { 
+                    question: '... be incredibly funny or incredibly smart? ',
+                    answer1: 'Funny',
+                    answer2: 'Smart',
+                    userSelectionMessage: ''
+                }
+            },
+            methods: {
+
+            },
+            //register components in Vue instance
+            components: {
+                'would-you-rather-question': WouldYouRatherQuestionComponent
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>
